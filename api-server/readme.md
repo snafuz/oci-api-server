@@ -19,8 +19,8 @@ The preferred way to run the server is emebded in a Container (see [here](../rea
 If you want to run it on your machine.
 
 ```bash
-    $ git clone ...
-    $ cd oci-api-server
+    $ git clone https://github.com/snafuz/oci-api-server.git
+    $ cd oci-api-server/api-server
 
     $ pip install virtualenv
     $ virtualenv venv-oci-api-server

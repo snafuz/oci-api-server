@@ -9,7 +9,7 @@ For the OCI API Server functions see [the server documentation](api-server/readm
 
 
 ```bash
-    git clone ...
+    git clone https://github.com/snafuz/oci-api-server.git
     ./build.sh
 ```    
 ## Usage
