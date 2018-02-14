@@ -1,0 +1,14 @@
+api-server/config.json
+tf_code/
+tf-code/
+.DS_Store
+**/.idea/**
+
+__pycache__/
+*.py[cod]
+*$py.class
+pip-log.txt
+pip-delete-this-directory.txt
+*.log
+instance/
+.webassets-cache

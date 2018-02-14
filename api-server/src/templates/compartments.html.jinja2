@@ -1,0 +1,19 @@
+{% extends "base.html.jinja2" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Compartment List</h1>
+    <table>
+       {% for compartment in compartments %}
+       <tr>
+            <td>{{ compartment['name'] }}</td>
+            <td>{{ compartment['compartment id'] }}</td>
+       </tr>
+       {% endfor %}
+    </table>
+{% endblock %}

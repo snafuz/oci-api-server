@@ -1,0 +1,12 @@
+{
+  "terraform":{
+    "tf_path":"path to terraform files"
+  },
+  "oci" :{
+    "compartment" :"(OPTIONAL) compartment name or OCID: default value from ~/.oci/config",
+    "profile" : "(OPTIONAL) select a specific configuration in  ~/.oci/config",
+    "default_values" : {    }
+  }
+
+}
+
