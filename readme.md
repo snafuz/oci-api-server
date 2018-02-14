@@ -22,7 +22,7 @@ Edit config.json according to your environment
 
 Put you terraform file(s) in ./data  
 
-* NOTE: don't use config.json to setup terraform path if you're using Docker image *
+***NOTE: don't use config.json to setup terraform path if you're using Docker image***
 
 #### Run API Server
 To run the server as daemon
