@@ -1,4 +1,4 @@
-#OCI API Server
+# OCI API Server
 ## Introduction
 
 Docker image to run API server to interact with OCI.
@@ -21,7 +21,7 @@ Edit config.json according to your environment
 #### Configuration for Terraform
 
 Put you terraform file(s) in ./data  
-*** NOTE: don't use config.json to setup terraform path if you're using Docker image ***
+___ NOTE: don't use config.json to setup terraform path if you're using Docker image ___
 
 #### Run API Server
 To run the server as daemon
