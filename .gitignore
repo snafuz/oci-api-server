@@ -3,6 +3,7 @@ tf_code/
 tf-code/
 .DS_Store
 **/.idea/**
+*.code-workspace
 
 __pycache__/
 *.py[cod]
