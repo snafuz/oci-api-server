@@ -123,8 +123,8 @@ $ curl http://localhost:5000/destroy
 }
 ```
 
-####_OCI_
-####_scale instance_
+#### _OCI_
+#### _scale instance_
 
 Scale up/down an existing instance.
 Currently the instance is identified by compartment name + instance name. If multiple instances with the same name exist the action will fail
