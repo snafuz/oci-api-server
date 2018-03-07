@@ -7,7 +7,7 @@ from flask import  render_template, current_app
 from flask_restplus import Api, Resource
 from python_terraform import *
 
-from wrappers.ociapi import  OciWrapper
+from wrappers.oci_scripts.oci_wrapper import OciWrapper
 from wrappers.terraform import TerraformWrapper
 
 
@@ -29,6 +29,13 @@ try:
         cfg = json.load(config_file)
 except Exception as e:
     logging.exception('Unable to load config file')
+
+#Init logging
+if cfg and cfg.get('logging') and cfg.get('logging').get('level'):
+    try:
+        getattr(logging, cfg.get('logging').get('level').upper())
+    except :
+        logging.error('unable to set logging level from congif file')
 
 # Init Terraform wrapper
 tf_wrapper = None

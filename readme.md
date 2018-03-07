@@ -1,46 +1,153 @@
-# OCI API Server
-## Introduction
+#OCI API SERVER
+##Introduction
 
-Docker image to run API server to interact with OCI.
+API server to interact with OCI via Terraform and OCI SDK
 
-For the OCI API Server functions see [the server documentation](api-server/readme.md)
+The server is providing rest API leveraging the following pyhton modules
+* Flask --> microframework
+* Flask-RESTPlus --> Flask extension to build REST API
+* python-terraform (0.9.1) --> providea a wrapper of `terraform` command line tool
+* oci (1.3.14)
+
+This project is currently in Beta. You will use at your own risk
 
 ## Installation
 
+The preferred way to run the server is emebded in a Container (see [here](container/readme.md))
+
+To run it outside a container Python3 is required.
+* Setup a virtualenv and install the dependencies.
 
 ```bash
-    git clone https://github.com/snafuz/oci-api-server.git
-    ./build.sh
-```    
-## Usage
-#### Configuration for OCI
-```bash
-$ cp ./api-server/data/template_config.json ./data/config.json
+    $ git clone https://github.com/snafuz/oci-api-server.git
+    $ cd oci-api-server
+
+    $ pip install virtualenv
+    $ virtualenv venv-oci-api-server
+    $ . venvoci-api-server/bin/activate
+
+    (venv-oci-api-server) $ pip install -r pip_packages.txt
+
 ```
-Edit config.json according to your environment 
-#### Configuration for Terraform
 
-Put you terraform file(s) in ./data  
+* Setup OCI SDK environment ([OCI SDK and Tool Configuration](https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/sdkconfig.htm))
 
-***NOTE: don't use config.json to setup terraform path if you're using Docker image***
+
+## Usage
+Prepare the configuration file:
+```bash
+$ cp data/template_config.json data/config.json
+```
+
+##### *Setup API Server*
+Setup log level
+```
+"logging":{
+    "level":"set logging level options: DEBUG(default)|INFO|WARNING|ERROR|CRITICAL"
+  },
+```
+
+##### *Setup  OCI*
+Edit config.json according to your environment
+
+```
+  "oci" :{
+    "compartment" :"(OPTIONAL) compartment name or OCID: default value from ~/.oci/config",
+    "profile" : "(OPTIONAL) select a specific configuration in  ~/.oci/config",
+    "default_values" : {    }
+  }
+```
+
+
+#####  *Setup Terraform*
+
+```
+  "terraform":{
+    "tf_path":"path to terraform files"
+  },
+```
 
 #### Run API Server
-To run the server as daemon
+Run the server
 ```bash
-    ./run-server.sh ./data
-    #API Server running on http://localhost:5000/
-    
-```
-To stop the server
-```bash
-    ./stop-server.sh
-    
+$ . venvoci-api-server/bin/activate
+
+(venv-oci-api-server) $ python oci-api-server.py config.json
+#API Server running on http://localhost:5000/
+
 ```
 
-To run the server in interactive mode 
+The server will run ***terraform init*** on the provided directory at startup
+
+### Available APIs
+
+#### _Terraform_
+
+##### _plan_
+shows an execution plan summary
+
+example:
 
 ```bash
-    ./run-server-interactive.sh ./data
-    #API Server running on http://localhost:5000/
-    
+$ curl http://localhost:5000/plan
+{
+    "plan": [
+        "add oci_core_internet_gateway.internetgateway1",
+        "add oci_core_virtual_network.vcn1"
+    ]
+}
 ```
+##### _apply_
+builds or changes infrastructure according to Terraform configuration in the working directory
+
+***NOTE: this will apply the configuration without asking for confirmation***
+
+example:
+```bash
+$ curl http://localhost:5000/apply
+{
+    "apply": "Apply complete! Resources: 2 added, 0 changed, 0 destroyed."
+}
+```
+#####_destroy_
+
+destroy Terraform-managed infrastructure.
+
+***NOTE: this will destroy all without asking for confirmation***
+
+example:
+```bash
+$ curl http://localhost:5000/destroy
+{
+    "destroy": "Destroy complete! Resources: 2 destroyed."
+}
+```
+
+####_OCI_
+####_scale instance_
+
+Scale up/down an existing instance.
+Currently the instance is identified by compartment name + instance name. If multiple instances with the same name exist the action will fail
+
+```
+API: action/scale/compartment_name/instance_name/new_shape
+```
+example:
+```bash
+$ curl http://localhost:5001/action/scale/am-lab/instance20180214072455/VM.Standard1.1
+
+{
+    "instance_ocid": "ocid1.instance.oc1.eu-frankfurt-1.abtheljraljk5mq7lf3fpsff4k7zcjgtyuvrlkch7ozzqf4b7fx2vafjaueq"
+
+}
+```
+
+
+
+
+
+
+
+
+
+

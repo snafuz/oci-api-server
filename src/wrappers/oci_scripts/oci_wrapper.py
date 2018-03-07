@@ -8,6 +8,7 @@ from oci.exceptions import ServiceError
 import oci.waiter
 import json
 import logging
+import sys
 
 
 class OciWrapper:
@@ -192,14 +193,25 @@ class OciWrapper:
         new_instance_ocid = self.launch_instance(instance_details)
         return new_instance_ocid
 
-    def _test(self):
-        pass
+    def _test(self,c_ocid,i_ocid):
+        idet = self.get_instance_details(c_ocid,i_ocid)
+        return idet
 
 
 
 if __name__ == "__main__":
-    #test purpose
-    config_path = './config.json'
+
+    config_path = 'config.json'
+    if len(sys.argv) > 1:
+        config_path = sys.argv[1];
     with open(config_path) as config_file:
         cfg = json.load(config_file)
-    OciWrapper(cfg.get("oci"))._test( )
+
+    if cfg and cfg.get("oci"):
+        try:
+            oci_cfg = cfg.get("oci")
+        except:
+            logging.error('unable to load OCI wrapper')
+    # TODO: implement script selection via comand line or config.json
+    OciWrapper(oci_cfg).scale(oci_cfg.get("new_shape"),compartment_ocid=oci_cfg.get("compartment_ocid"), instance_ocid=oci_cfg.get("instance_ocid"))
+    #print(OciWrapper(oci_cfg).list_compartments())

@@ -1,0 +1,21 @@
+{
+  "logging":{
+    "level":"set logging level options: DEBUG(default)|INFO|WARNING|ERROR|CRITICAL"
+  },
+  "terraform":{
+    "tf_path":"path to terraform files"
+  },
+  "oci" :{
+    "compartment" :"(OPTIONAL) compartment name or OCID: default value from ~/.oci/config",
+    "profile" : "(OPTIONAL) select a specific configuration in  ~/.oci/config",
+    "actions":{
+      "scale":{
+        "new_shape":"new shape name",
+        "compartment_ocid" :"compartment OCID cointaining the instance to be scaled ",
+        "instance_ocid":"instance OCID"
+      }
+    }
+  }
+
+}
+
