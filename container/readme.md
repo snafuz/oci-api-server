@@ -1,4 +1,4 @@
-# OCI API Server
+# OCI API Server on Docker
 ## Introduction
 
 Docker image to run API server to interact with OCI.
@@ -7,7 +7,7 @@ For the OCI API Server functions see [the server documentation](../readme.md)
 
 ## Installation
 
-___Docker 1.8 is required___
+___Docker 1.9 or above is required___
 
 ```bash
     git clone https://github.com/snafuz/oci-api-server.git

@@ -1,4 +1,4 @@
-# OCI API SERVER
+# OCI API Server
 ## Introduction
 
 API server to interact with OCI via Terraform and OCI SDK
