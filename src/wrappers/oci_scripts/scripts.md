@@ -1,8 +1,8 @@
-#OCI Scripts
+# OCI Scripts
 
-###_oci_wrapper package_
+### _oci_wrapper package_
 
-####Installation
+#### Installation
 
 * Setup a virtualenv and install the dependencies.
 
@@ -22,9 +22,9 @@
 
 
 
-####Instance Scale up/down
+#### Instance Scale up/down
 
-####*Usage*
+#### *Usage*
 
 Prepare the configuration file:
 ```bash

@@ -25,7 +25,7 @@ $ cp data/template_config.json data/config.json
 
 Edit config.json according to your environment
 
-####  Setup Terraform
+#### Setup Terraform
 
 Put you terraform file(s) in ./data
 
